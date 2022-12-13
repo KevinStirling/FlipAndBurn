@@ -37,11 +37,11 @@ script = ExtResource("1_xiwe8")
 
 [node name="ShipFloor" type="Area2D" parent="Ship"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 4
 
 [node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship/ShipFloor"]
 build_mode = 1
-polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
+polygon = PackedVector2Array(-199, -69, 127, -69, 196, -35, 215, 2, 196, 36, 129, 69, -199, 69)
 
 [node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship"]
 build_mode = 1

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var ship_interior = $"../Ship/ShipFloor"
+@onready var ship = $"../Ship"
 
 const SPEED = 300.0
 
@@ -8,18 +9,19 @@ const SPEED = 300.0
 # Store the current movement input
 var movement = Vector2.ZERO
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var gravity = 9.8
+var on_floor = true
+
 
 func _ready():
 	ship_interior.body_entered.connect(_player_entered_ship)
 	ship_interior.body_exited.connect(_player_exited_ship)
 	
 func _player_entered_ship(body):
+	on_floor = true
 	print("player inside")
 	
 func _player_exited_ship(body):
+	on_floor = false
 	print("player outside")
 
  
@@ -27,27 +29,23 @@ func _player_exited_ship(body):
 func _physics_process(delta):
 # THIS OBVIOUSLY NEEDS TO BE CHANGED
 	# Get the current velocity
-	var velocity = Vector2()
 
-# Check if the left or right arrow key is pressed
-	if Input.is_action_pressed("ui_right"):
+	velocity = Vector2.ZERO
+	
+	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
-
-	# Check if the up or down arrow key is pressed
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed('ui_down'):
 		velocity.y += 1
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed('ui_up'):
 		velocity.y -= 1
-
-	# Normalize the velocity so that diagonal movement is not faster
-	velocity = velocity.normalized()
-
-	# Scale the velocity by the speed
-	velocity *= SPEED
-
-	# Apply the velocity to the character's position
-#	position += velocity * delta
+	# Make sure diagonal movement isn't faster
+	velocity = velocity.normalized() * SPEED
+	#keeps player model locked to the rotation and movement of the ship when inside
+	if on_floor : 
+		velocity = velocity + ship.linear_velocity
+		rotation = ship.rotation
 	move_and_slide()
+	
 
