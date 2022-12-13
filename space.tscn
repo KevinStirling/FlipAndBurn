@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://b876jo85g5nyk"]
+
+[ext_resource type="Script" path="res://Ship.gd" id="1_xiwe8"]
+[ext_resource type="Script" path="res://Player.gd" id="2_mq15w"]
+
+[sub_resource type="Gradient" id="Gradient_dtps5"]
+offsets = PackedFloat32Array(0.624454, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_67fqo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kyiut"]
+seamless = true
+color_ramp = SubResource("Gradient_dtps5")
+noise = SubResource("FastNoiseLite_67fqo")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s4a2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nslmi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o40aa"]
+size = Vector2(18, 18)
+
+[node name="Space" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(264, 412)
+scale = Vector2(25.2813, 20.3906)
+texture = SubResource("NoiseTexture2D_kyiut")
+
+[node name="Ship" type="RigidBody2D" parent="."]
+position = Vector2(568, 320)
+collision_layer = 3
+collision_mask = 0
+can_sleep = false
+script = ExtResource("1_xiwe8")
+
+[node name="ShipFloor" type="Area2D" parent="Ship"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship/ShipFloor"]
+build_mode = 1
+polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
+
+[node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship"]
+build_mode = 1
+polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
+
+[node name="ShipBase" type="Polygon2D" parent="Ship"]
+color = Color(0.309804, 0.223529, 0.290196, 1)
+polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
+
+[node name="ExternalCamera" type="Camera2D" parent="Ship"]
+current = true
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(523, 319)
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+slide_on_ceiling = false
+floor_block_on_wall = false
+platform_floor_layers = 0
+script = ExtResource("2_mq15w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_4s4a2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+material = SubResource("CanvasItemMaterial_nslmi")
+texture = SubResource("PlaceholderTexture2D_o40aa")
