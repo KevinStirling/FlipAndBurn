@@ -2,13 +2,9 @@ extends CharacterBody2D
 
 @onready var ship_interior = $"../Ship/ShipFloor"
 @onready var ship = $"../Ship"
+@onready var raycast = $RayCast2D
 
 const SPEED = 300.0
-
-
-# Store the current movement input
-var movement = Vector2.ZERO
-
 var on_floor = true
 
 
@@ -24,28 +20,17 @@ func _player_exited_ship(body):
 	on_floor = false
 	print("player outside")
 
- 
-
 func _physics_process(delta):
-# THIS OBVIOUSLY NEEDS TO BE CHANGED
-	# Get the current velocity
-
 	velocity = Vector2.ZERO
+	var position_from_wall = position.distance_to(raycast.get_collision_point())
 	
-	if Input.is_action_pressed('ui_right'):
-		velocity.x += 1
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= 1
-	if Input.is_action_pressed('ui_down'):
-		velocity.y += 1
-	if Input.is_action_pressed('ui_up'):
-		velocity.y -= 1
-	# Make sure diagonal movement isn't faster
-	velocity = velocity.normalized() * SPEED
-	#keeps player model locked to the rotation and movement of the ship when inside
+	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = input_direction.normalized() * SPEED
 	if on_floor : 
 		velocity = velocity + ship.linear_velocity
-		rotation = ship.rotation
+		rotation = ship.transform.get_rotation()
+#		use position_from_wall to simulate the player standing on a rotating platform??
+		
 	move_and_slide()
 	
 
