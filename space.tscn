@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b876jo85g5nyk"]
+[gd_scene load_steps=10 format=3 uid="uid://b876jo85g5nyk"]
 
 [ext_resource type="Script" path="res://Ship.gd" id="1_xiwe8"]
 [ext_resource type="Script" path="res://Player.gd" id="2_mq15w"]
@@ -12,6 +12,8 @@ offsets = PackedFloat32Array(0.624454, 1)
 seamless = true
 color_ramp = SubResource("Gradient_dtps5")
 noise = SubResource("FastNoiseLite_67fqo")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pney4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s4a2"]
 
@@ -42,22 +44,36 @@ gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 
 [node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship/ShipFloor"]
-build_mode = 1
-polygon = PackedVector2Array(-199, -69, 127, -69, 196, -35, 215, 2, 196, 36, 129, 69, -199, 69)
+polygon = PackedVector2Array(-201, -74, 131, -74, 201, -40, 218, -1, 198, 37, 132, 72, -201, 72)
 
 [node name="ShipBaseCollision" type="CollisionPolygon2D" parent="Ship"]
+position = Vector2(-1, 1)
 build_mode = 1
-polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
+polygon = PackedVector2Array(-37, -69, -35, -62, -186, -62, -186, 59, 126, 59, 190, 28, 205, -1, 190, -31, 129, -61, 4, -61, 4, -69, 128, -69, 194, -36, 211, -5, 195, 32, 128, 68, -193, 67, -194, -69)
 
 [node name="ShipBase" type="Polygon2D" parent="Ship"]
 color = Color(0.309804, 0.223529, 0.290196, 1)
 polygon = PackedVector2Array(-192, -64, 128, -64, 192, -32, 208, 0, 192, 32, 128, 64, -192, 64)
 
-[node name="ExternalCamera" type="Camera2D" parent="Ship"]
-current = true
+[node name="Door" type="Polygon2D" parent="Ship/ShipBase"]
+polygon = PackedVector2Array(-37, -66, -37, -62, 3, -62, 2, -66)
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(523, 319)
+[node name="ExternalCamera" type="Camera2D" parent="Ship"]
+
+[node name="Helm" type="Area2D" parent="Ship"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="HelmArea" type="CollisionShape2D" parent="Ship/Helm"]
+position = Vector2(178, -3)
+shape = SubResource("RectangleShape2D_pney4")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ship/Helm"]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(168, -12, 188, -12, 188, 7, 168, 7)
+
+[node name="Player" type="CharacterBody2D" parent="Ship"]
+position = Vector2(-45, -1)
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
@@ -66,13 +82,14 @@ floor_block_on_wall = false
 platform_floor_layers = 0
 script = ExtResource("2_mq15w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/Player"]
 shape = SubResource("CircleShape2D_4s4a2")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite2D" parent="Ship/Player"]
 material = SubResource("CanvasItemMaterial_nslmi")
 texture = SubResource("PlaceholderTexture2D_o40aa")
 
-[node name="RayCast2D" type="RayCast2D" parent="Player"]
-target_position = Vector2(0, 500)
-collide_with_areas = true
+[node name="Camera" type="Camera2D" parent="Ship/Player"]
+ignore_rotation = false
+current = true
+zoom = Vector2(3, 3)
