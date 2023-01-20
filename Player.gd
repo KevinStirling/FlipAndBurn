@@ -6,10 +6,11 @@ extends CharacterBody2D
 @onready var helm = get_node("/root/Space/Ship/Helm")
 @onready var ext_cam = get_node("/root/Space/Ship/ExternalCamera")
 
-const SPEED = 300.0
+const SPEED = 200.0
 const DEF_CAM_ZOOM = Vector2(3,3)
 
 var on_floor = true
+var in_helm_trigger = false
 var in_helm = false
 
 func _ready():
@@ -21,9 +22,9 @@ func _ready():
 func _player_entered_ship(body):
 	if on_floor != true:
 #		var pos = global_position
-		var pos = global_transform
-		reparent(body, ship)
-		transform = pos
+#		var pos = global_transform
+		reparent(ship, true)
+#		transform = pos
 		on_floor = true
 	print("player inside")
 	$Camera.zoom = DEF_CAM_ZOOM
@@ -32,51 +33,53 @@ func _player_entered_ship(body):
 func _player_exited_ship(body):
 	if on_floor != false:
 		var pos = global_transform
-		reparent(self, space)
+		reparent(space, true)
 		transform = pos
 		on_floor = false
 	print("player outside")
 	$Camera.zoom = Vector2(1,1)
 	ship_interior.monitoring = true
+	
+func _unhandled_input(event):
+		if Input.is_action_just_pressed("interact"):
+			if in_helm_trigger:
+				if in_helm :
+					print("no longer helming ship")
+					in_helm = false
+					ship.player_in_helm = false
+					$Camera.current = true
+				elif !in_helm:
+					print("now helming ship")
+					in_helm = true
+					ship.player_in_helm = true
+					ext_cam.current = true
 
 func _physics_process(delta):
-	if in_helm :
-		if Input.is_action_pressed("ui_up"):
-			pass
-		if Input.is_action_pressed("ui_down"):
-			pass
-		pass
-#		how am i going to get the signals between the player input and the ship?
-#		some kind of control interface?
-#		maybe create a resource inputmap for each state ( helm / not helm )
-#		https://docs.godotengine.org/en/stable/classes/class_inputmap.html
-#		could load it with code from a list of input actions or maybe swap inputmap resources?
-#		honestly probably just need to make a proper state machine and use it to tell when and which
-#		player is controlling the helms... or just have ship subscribe to signal for helm entered?
-		
-	else:
+	if !in_helm :
 		velocity = Vector2.ZERO
 		var orientation_dir = Vector2.ZERO
-		var input_direction = Input.get_vector("ui_left", "ui_right", "up", "ui_down")
+		var input_direction = Input.get_vector("left", "right", "up", "down")
 		if on_floor :
 				velocity = input_direction.normalized().rotated(ship.transform.get_rotation()) * SPEED
 		else:
 				velocity = input_direction.normalized() * SPEED
+		if input_direction != Vector2.ZERO:
+			$Sprite2D.rotation = lerp_angle(deg_to_rad($Sprite2D.rotation_degrees), input_direction.angle(), .2)
 		move_and_slide()
 	
-
-func reparent(child: Node, new_parent: Node):
-	var old_parent = get_parent()
-	old_parent.remove_child(child)
-	new_parent.call_deferred("add_child", child)
-	child.set_owner(new_parent)
+# apparently this now a built in func, may need to make my own though...
+#func reparent(child: Node, new_parent: Node):
+#	var old_parent = get_parent()
+#	old_parent.remove_child(child)
+#	new_parent.call_deferred("add_child", child)
+#	child.set_owner(new_parent)
 
 func _helm_entered(body):
-	print("helm entered")
-	ext_cam.current = true
-	in_helm = true
+	print("helm trigger entered")
+	in_helm_trigger = true
 
 func _helm_exited(body):
-	print("helm exited")
-	$Camera.current = true
-	in_helm = false
+	print("helm trigger exited")
+#	work around for area_entered emitting when ship moving fast
+	if !in_helm:
+		in_helm_trigger = false

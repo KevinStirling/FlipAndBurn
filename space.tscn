@@ -1,17 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b876jo85g5nyk"]
+[gd_scene load_steps=8 format=3 uid="uid://b876jo85g5nyk"]
 
+[ext_resource type="Texture2D" uid="uid://bp6mn8enmdsja" path="res://texture_08.png" id="1_f62qd"]
 [ext_resource type="Script" path="res://Ship.gd" id="1_xiwe8"]
 [ext_resource type="Script" path="res://Player.gd" id="2_mq15w"]
-
-[sub_resource type="Gradient" id="Gradient_dtps5"]
-offsets = PackedFloat32Array(0.624454, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_67fqo"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kyiut"]
-seamless = true
-color_ramp = SubResource("Gradient_dtps5")
-noise = SubResource("FastNoiseLite_67fqo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pney4"]
 
@@ -24,13 +15,16 @@ size = Vector2(18, 18)
 
 [node name="Space" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 texture_repeat = 2
-position = Vector2(264, 412)
-scale = Vector2(25.2813, 20.3906)
-texture = SubResource("NoiseTexture2D_kyiut")
+offset_left = -500000.0
+offset_top = -500000.0
+offset_right = 500000.0
+offset_bottom = 500000.0
+texture = ExtResource("1_f62qd")
+stretch_mode = 1
 
-[node name="Ship" type="RigidBody2D" parent="."]
+[node name="Ship" type="RigidDynamicBody2D" parent="."]
 position = Vector2(568, 320)
 collision_layer = 3
 collision_mask = 0
@@ -61,6 +55,7 @@ polygon = PackedVector2Array(-37, -66, -37, -62, 3, -62, 2, -66)
 [node name="ExternalCamera" type="Camera2D" parent="Ship"]
 
 [node name="Helm" type="Area2D" parent="Ship"]
+process_mode = 3
 collision_layer = 0
 collision_mask = 4
 
@@ -79,7 +74,6 @@ collision_mask = 2
 motion_mode = 1
 slide_on_ceiling = false
 floor_block_on_wall = false
-platform_floor_layers = 0
 script = ExtResource("2_mq15w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/Player"]
@@ -90,6 +84,5 @@ material = SubResource("CanvasItemMaterial_nslmi")
 texture = SubResource("PlaceholderTexture2D_o40aa")
 
 [node name="Camera" type="Camera2D" parent="Ship/Player"]
-ignore_rotation = false
 current = true
 zoom = Vector2(3, 3)
