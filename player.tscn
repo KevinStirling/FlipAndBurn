@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwkybxlxyviy2"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_jwodo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5pfn"]
+size = Vector2(16, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nslmi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o40aa"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+slide_on_ceiling = false
+floor_block_on_wall = false
+script = ExtResource("1_jwodo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r5pfn")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_nslmi")
+texture = SubResource("PlaceholderTexture2D_o40aa")
+
+[node name="Camera" type="Camera2D" parent="."]
+ignore_rotation = false
+current = true
+zoom = Vector2(3, 3)

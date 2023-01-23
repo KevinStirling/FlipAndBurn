@@ -67,12 +67,6 @@ func _physics_process(delta):
 			$Sprite2D.rotation = lerp_angle(deg_to_rad($Sprite2D.rotation_degrees), input_direction.angle(), .2)
 		move_and_slide()
 	
-# apparently this now a built in func, may need to make my own though...
-#func reparent(child: Node, new_parent: Node):
-#	var old_parent = get_parent()
-#	old_parent.remove_child(child)
-#	new_parent.call_deferred("add_child", child)
-#	child.set_owner(new_parent)
 
 func _helm_entered(body):
 	print("helm trigger entered")

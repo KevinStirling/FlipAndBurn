@@ -33,22 +33,3 @@ func _integrate_forces(state):
 			apply_torque_impulse(torque)
 		if Input.is_action_pressed("rotate_right"):
 			apply_torque_impulse(-torque)
-
-# Possilbly these functions are a temp interface layer between the player and ship
-func main_burn():
-	Input.action_press("burn")
-	
-func lat_rev():
-	Input.action_press("lateral_reverse")
-
-func lat_left():
-	Input.action_press("lateral_left")
-	
-func lat_right():
-	Input.action_press("lateral_right")
-
-func rot_left():
-	Input.action_press("rotate_left")
-
-func rot_right():
-	Input.action_press("rotate_right")
