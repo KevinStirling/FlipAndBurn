@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b876jo85g5nyk"]
+[gd_scene load_steps=11 format=3 uid="uid://b876jo85g5nyk"]
 
 [ext_resource type="Texture2D" uid="uid://bp6mn8enmdsja" path="res://texture_08.png" id="1_f62qd"]
 [ext_resource type="Script" path="res://Ship.gd" id="1_xiwe8"]
 [ext_resource type="PackedScene" uid="uid://cwkybxlxyviy2" path="res://player.tscn" id="3_2cf00"]
 [ext_resource type="Texture2D" uid="uid://bdgutr8j60iv3" path="res://ship_tilemap_base.png" id="3_segad"]
+[ext_resource type="Texture2D" uid="uid://b155moa2gc7tr" path="res://captains_chair.png" id="4_o8pgs"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_qadti"]
 tile_data = PackedInt32Array(0, 196609, 2, 65536, 196609, 2, 131072, 196609, 2, 196608, 196609, 2, 1, 196609, 0, 196609, 131073, 0, 2, 196609, 0, 196610, 131073, 0, 3, 196609, 2, 65539, 65537, 0, 131075, 65537, 0, 196611, 196609, 1)
@@ -82,10 +83,13 @@ tile_size = Vector2i(200, 200)
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 4
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_qy6sr")
+custom_data_layer_0/name = "test_signal"
+custom_data_layer_0/type = 26
 sources/1 = SubResource("TileSetAtlasSource_ra4en")
 pattern_0 = SubResource("TileMapPattern_qadti")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pney4"]
+size = Vector2(48.5, 60)
 
 [node name="Space" type="Node2D"]
 
@@ -100,7 +104,6 @@ stretch_mode = 1
 
 [node name="Ship" type="RigidBody2D" parent="."]
 position = Vector2(568, 320)
-scale = Vector2(0.8, 0.8)
 collision_mask = 0
 can_sleep = false
 script = ExtResource("1_xiwe8")
@@ -148,12 +151,14 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="HelmArea" type="CollisionShape2D" parent="Ship/Helm"]
-position = Vector2(178, -3)
+position = Vector2(175.25, -3.10001)
 shape = SubResource("RectangleShape2D_pney4")
 
-[node name="Polygon2D" type="Polygon2D" parent="Ship/Helm"]
-position = Vector2(0, -1)
-polygon = PackedVector2Array(168, -12, 188, -12, 188, 7, 168, 7)
+[node name="Sprite2D" type="Sprite2D" parent="Ship/Helm"]
+position = Vector2(178, -3.10001)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_o8pgs")
 
 [node name="Player" parent="Ship" instance=ExtResource("3_2cf00")]
 position = Vector2(70, 2)

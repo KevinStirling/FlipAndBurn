@@ -64,7 +64,7 @@ func _physics_process(delta):
 		else:
 				velocity = input_direction.normalized() * SPEED
 		if input_direction != Vector2.ZERO:
-			$Sprite2D.rotation = lerp_angle(deg_to_rad($Sprite2D.rotation_degrees), input_direction.angle(), .2)
+			$BodySprite.rotation = lerp_angle(deg_to_rad($BodySprite.rotation_degrees), input_direction.angle(), .2)
 		move_and_slide()
 	
 

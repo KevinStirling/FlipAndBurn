@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlty31hkpgfq6" path="res://generic_man.png" id="2_l3myq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5pfn"]
-size = Vector2(16, 16)
+size = Vector2(32, 32)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nslmi"]
 
@@ -20,10 +20,10 @@ script = ExtResource("1_jwodo")
 shape = SubResource("RectangleShape2D_r5pfn")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BodySprite" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_nslmi")
 position = Vector2(1, 0)
-scale = Vector2(0.202049, 0.202049)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_l3myq")
 
 [node name="Camera" type="Camera2D" parent="."]
