@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var ext_cam = get_node("/root/Space/Ship/ExternalCamera")
 
 const SPEED = 200.0
-const DEF_CAM_ZOOM = Vector2(3,3)
+const DEF_CAM_ZOOM = Vector2(2,2)
 
 var on_floor = true
 var in_helm_trigger = false
