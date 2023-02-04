@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b876jo85g5nyk"]
+[gd_scene load_steps=11 format=3 uid="uid://b876jo85g5nyk"]
 
 [ext_resource type="Texture2D" uid="uid://bp6mn8enmdsja" path="res://texture_08.png" id="1_f62qd"]
 [ext_resource type="Script" path="res://Ship.gd" id="1_xiwe8"]
 [ext_resource type="PackedScene" uid="uid://cwkybxlxyviy2" path="res://player.tscn" id="3_2cf00"]
 [ext_resource type="Texture2D" uid="uid://cbi14j5tn4vid" path="res://tilesheet_complete_2X.png" id="3_k1slo"]
 [ext_resource type="Texture2D" uid="uid://duq2xrkom4syo" path="res://arm_chair.png" id="4_l24o7"]
+[ext_resource type="Texture2D" uid="uid://7axctgewxblb" path="res://old_tv.png" id="6_0ycj7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3ejju"]
 
@@ -1779,7 +1780,7 @@ process_callback = 0
 
 [node name="Helm" type="Area2D" parent="Ship"]
 process_mode = 3
-position = Vector2(703, 3.00001)
+position = Vector2(681, 2.00001)
 collision_layer = 0
 collision_mask = 4
 
@@ -1795,3 +1796,21 @@ texture = ExtResource("4_l24o7")
 
 [node name="Player" parent="Ship" instance=ExtResource("3_2cf00")]
 position = Vector2(511, -2.99999)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ship"]
+position = Vector2(748, -67)
+rotation = -2.0944
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_0ycj7")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Ship"]
+position = Vector2(747, 64)
+rotation = -0.942478
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_0ycj7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Ship"]
+position = Vector2(766, -1)
+rotation = -1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_0ycj7")
