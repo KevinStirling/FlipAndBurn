@@ -1,0 +1,146 @@
+[gd_scene load_steps=10 format=3 uid="uid://cr8p8koshygau"]
+
+[ext_resource type="Script" path="res://sliding_doors.gd" id="1_2hmf1"]
+[ext_resource type="Texture2D" uid="uid://dwjavkv4jwfrl" path="res://assets/sliding_door_left.png" id="1_mtroh"]
+[ext_resource type="Texture2D" uid="uid://b7ounjor2taqv" path="res://assets/sliding_door_right.png" id="2_mawbj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lryk0"]
+size = Vector2(128, 75)
+
+[sub_resource type="Animation" id="Animation_6oxc5"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 0.5),
+"update": 0,
+"values": [Vector2(64, 0), Vector2(192, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 0.5),
+"update": 0,
+"values": [Vector2(-64, 0), Vector2(-192, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7lpfx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-64, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qlh73"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(192, 0), Vector2(64, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(-192, 0), Vector2(-64, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ex7em"]
+_data = {
+"RESET": SubResource("Animation_7lpfx"),
+"close": SubResource("Animation_qlh73"),
+"open": SubResource("Animation_6oxc5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5ws8"]
+size = Vector2(256, 180)
+
+[node name="SlidingDoors" type="Node2D"]
+script = ExtResource("1_2hmf1")
+
+[node name="Left" type="Sprite2D" parent="."]
+position = Vector2(-64, 0)
+texture = ExtResource("1_mtroh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Left"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left/StaticBody2D"]
+visible = false
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_lryk0")
+
+[node name="Right" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("2_mawbj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Right"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right/StaticBody2D"]
+visible = false
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_lryk0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ex7em")
+}
+
+[node name="OpenArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_m5ws8")
+
+[connection signal="area_entered" from="OpenArea" to="." method="_on_open_area_area_entered"]
+[connection signal="area_exited" from="OpenArea" to="." method="_on_open_area_area_exited"]

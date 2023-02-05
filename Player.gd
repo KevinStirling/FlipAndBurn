@@ -32,10 +32,7 @@ func _ready():
 
 func _player_entered_ship(body):
 	if on_floor != true:
-#		var pos = global_position
-#		var pos = global_transform
 		reparent(ship, true)
-#		transform = pos
 		on_floor = true
 	print("player inside")
 	$Camera.zoom = DEF_CAM_ZOOM
@@ -50,7 +47,17 @@ func _player_exited_ship(body):
 	print("player outside")
 	$Camera.zoom = Vector2(1,1)
 	ship_interior.monitoring = true
-	
+
+func _helm_entered(body):
+	print("helm trigger entered")
+	in_helm_trigger = true
+
+func _helm_exited(body):
+	print("helm trigger exited")
+#	work around for area_entered emitting when ship moving fast
+	if !in_helm:
+		in_helm_trigger = false
+
 func _unhandled_input(event):
 	if Input.is_action_pressed("sprint"):
 		move_speed = SPRINT_SPEED
@@ -70,7 +77,6 @@ func _unhandled_input(event):
 				ship.player_in_helm = true
 				$Camera.enabled = false
 				ext_cam.enabled = true
-					
 
 func _physics_process(delta):
 	if !in_helm :
@@ -88,17 +94,5 @@ func _physics_process(delta):
 			else:
 				$AnimationPlayer.play("walk")
 		else:
-			$AnimationPlayer.stop()
+			$AnimationPlayer.play("RESET")
 		move_and_slide()
-	
-
-func _helm_entered(body):
-	print("helm trigger entered")
-	in_helm_trigger = true
-
-func _helm_exited(body):
-	print("helm trigger exited")
-#	work around for area_entered emitting when ship moving fast
-	if !in_helm:
-		in_helm_trigger = false
-		

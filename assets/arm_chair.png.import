@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7axctgewxblb"
-path="res://.godot/imported/old_tv.png-e9e6fcbeb6e7d0c2f818e11b9cd2af55.ctex"
+uid="uid://duq2xrkom4syo"
+path="res://.godot/imported/arm_chair.png-096fd1880db019cbb6d8dd6aa9352c87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://old_tv.png"
-dest_files=["res://.godot/imported/old_tv.png-e9e6fcbeb6e7d0c2f818e11b9cd2af55.ctex"]
+source_file="res://assets/arm_chair.png"
+dest_files=["res://.godot/imported/arm_chair.png-096fd1880db019cbb6d8dd6aa9352c87.ctex"]
 
 [params]
 

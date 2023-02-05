@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6kfvjlw53b6m"
-path="res://.godot/imported/blueman_lefthand.png-0d05867f69bc2e0a504225137249241e.ctex"
+uid="uid://b7ounjor2taqv"
+path="res://.godot/imported/sliding_door_right.png-b5393200d333d6a9d012109b97cdd87b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://blueman_lefthand.png"
-dest_files=["res://.godot/imported/blueman_lefthand.png-0d05867f69bc2e0a504225137249241e.ctex"]
+source_file="res://assets/sliding_door_right.png"
+dest_files=["res://.godot/imported/sliding_door_right.png-b5393200d333d6a9d012109b97cdd87b.ctex"]
 
 [params]
 

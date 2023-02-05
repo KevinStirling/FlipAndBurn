@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cid278jr7wcbt"
-path="res://.godot/imported/ship_tilemap_base_64_scale.png-085928ab4c90b2f58ae71ba2bcda583d.ctex"
+uid="uid://c6kfvjlw53b6m"
+path="res://.godot/imported/blueman_lefthand.png-c34e0c403435f97c68ebfbf28e860890.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ship_tilemap_base_64_scale.png"
-dest_files=["res://.godot/imported/ship_tilemap_base_64_scale.png-085928ab4c90b2f58ae71ba2bcda583d.ctex"]
+source_file="res://assets/blueman_lefthand.png"
+dest_files=["res://.godot/imported/blueman_lefthand.png-c34e0c403435f97c68ebfbf28e860890.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3iah1gly6a56"
-path="res://.godot/imported/blueman_body.png-7179c8152299ee9f267d740f4a39e462.ctex"
+uid="uid://c1kr0yac3bkoh"
+path="res://.godot/imported/flipnburn32x32exp.png-ebd5877c7266d126ceec685bca865b6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://blueman_body.png"
-dest_files=["res://.godot/imported/blueman_body.png-7179c8152299ee9f267d740f4a39e462.ctex"]
+source_file="res://assets/flipnburn32x32exp.png"
+dest_files=["res://.godot/imported/flipnburn32x32exp.png-ebd5877c7266d126ceec685bca865b6a.ctex"]
 
 [params]
 
