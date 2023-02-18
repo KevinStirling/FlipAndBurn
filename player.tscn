@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6wismvr5glwv"]
+[gd_scene load_steps=12 format=3 uid="uid://dbdhul8533g5n"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_jwodo"]
+[ext_resource type="Script" path="res://player.gd" id="1_4sfw0"]
 [ext_resource type="Texture2D" uid="uid://b3iah1gly6a56" path="res://assets/blueman_body.png" id="2_crcop"]
 [ext_resource type="Texture2D" uid="uid://c6kfvjlw53b6m" path="res://assets/blueman_lefthand.png" id="3_x4kr4"]
 [ext_resource type="Texture2D" uid="uid://ducwrqteh45li" path="res://assets/blueman_righthand.png" id="4_cnset"]
@@ -183,7 +183,7 @@ collision_mask = 2
 motion_mode = 1
 slide_on_ceiling = false
 floor_block_on_wall = false
-script = ExtResource("1_jwodo")
+script = ExtResource("1_4sfw0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

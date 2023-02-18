@@ -16,10 +16,10 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	if player_in_helm:
 		if Input.is_action_pressed("burn"):
 			apply_central_impulse(thrust.rotated(transform.get_rotation()))
