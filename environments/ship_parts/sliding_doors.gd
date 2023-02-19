@@ -13,4 +13,4 @@ func _on_open_area_area_entered(area):
 
 func _on_open_area_area_exited(area):
 	if area.get_parent().name == "Player": 
-		$AnimationPlayer.play("close")
+		$AnimationPlayer.queue("close")
