@@ -9,14 +9,13 @@ extends PlayerState
 @export var DEF_CAM_ZOOM = Vector2(2,2)
 
 var on_floor = true
-var in_helm_trigger = false
-var in_helm = false
 
 func _ready():
 	state_factory = StateFactory.new()
 	change_state("idle")
 	ship_interior.body_entered.connect(_player_entered_ship)
 	ship_interior.body_exited.connect(_player_exited_ship)
+	var dir = DirAccess
 
 func _player_entered_ship(_body):
 	if on_floor != true:
@@ -42,6 +41,7 @@ func _unhandled_input(_event):
 			state.interact(state.interactable)
 
 func _physics_process(_delta):
+#	This all needs to be moved to the State's physics process class
 	if state.change_state.name != "interacting":
 		if Input.is_action_pressed("sprint"):
 			change_state("run")

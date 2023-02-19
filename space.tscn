@@ -1782,7 +1782,7 @@ polygon = PackedVector2Array(-1194, -585, -1194, -585, -1192, 699, -1192, 699, -
 [node name="ExternalCamera" type="Camera2D" parent="Ship"]
 position = Vector2(3, -2)
 enabled = false
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.5, 0.5)
 process_callback = 0
 
 [node name="Helm" parent="Ship" instance=ExtResource("5_8k8qs")]
