@@ -12,14 +12,11 @@ var on_floor = true
 var in_helm_trigger = false
 var in_helm = false
 
-
 func _ready():
 	state_factory = StateFactory.new()
 	change_state("idle")
 	ship_interior.body_entered.connect(_player_entered_ship)
 	ship_interior.body_exited.connect(_player_exited_ship)
-#	helm.body_entered.connect(_helm_entered)
-#	helm.body_exited.connect(_helm_exited)
 
 func _player_entered_ship(_body):
 	if on_floor != true:
@@ -39,27 +36,13 @@ func _player_exited_ship(_body):
 	$Camera.zoom = Vector2(1,1)
 	ship_interior.monitoring = true
 
-#func _helm_entered(_body):
-#	print("helm trigger entered")
-#	in_helm_trigger = true
-#
-#func _helm_exited(_body):
-#	print("helm trigger exited")
-##	work around for area_entered emitting when ship moving fast
-#	if !in_helm:
-#		in_helm_trigger = false
-
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("interact"):
 		if state.interactable != null:
 			state.interact(state.interactable)
-			if in_helm :
-				in_helm = false
-			elif !in_helm:
-				in_helm = true
 
 func _physics_process(_delta):
-	if !in_helm :
+	if state.change_state.name != "interacting":
 		if Input.is_action_pressed("sprint"):
 			change_state("run")
 		if Input.is_action_just_released("sprint"):
