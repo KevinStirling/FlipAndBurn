@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cr8p8koshygau"]
+[gd_scene load_steps=10 format=3 uid="uid://br8ccpjv51y6a"]
 
-[ext_resource type="Script" path="res://sliding_doors.gd" id="1_2hmf1"]
+[ext_resource type="Script" path="res://environments/ship_parts/sliding_doors.gd" id="1_b4rcr"]
 [ext_resource type="Texture2D" uid="uid://dwjavkv4jwfrl" path="res://assets/sliding_door_left.png" id="1_mtroh"]
 [ext_resource type="Texture2D" uid="uid://b7ounjor2taqv" path="res://assets/sliding_door_right.png" id="2_mawbj"]
 
@@ -101,7 +101,7 @@ _data = {
 size = Vector2(256, 180)
 
 [node name="SlidingDoors" type="Node2D"]
-script = ExtResource("1_2hmf1")
+script = ExtResource("1_b4rcr")
 
 [node name="Left" type="Sprite2D" parent="."]
 position = Vector2(-64, 0)

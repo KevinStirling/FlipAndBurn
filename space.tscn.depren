@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsr3ct85j7sk"]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bp6mn8enmdsja" path="res://assets/texture_08.png" id="1_adfhe"]
 [ext_resource type="Script" path="res://environments/ships/ship.gd" id="2_lig3h"]
 [ext_resource type="PackedScene" uid="uid://immsuafjfoc" path="res://characters/player.tscn" id="3_2cf00"]
 [ext_resource type="Texture2D" uid="uid://cbi14j5tn4vid" path="res://assets/tilesheet_complete_2X.png" id="3_lbs1v"]
-[ext_resource type="Script" path="res://smoother.gd" id="4_ystgi"]
-[ext_resource type="PackedScene" uid="uid://bjchlanfojlct" path="res://environments/ship_parts/helm.tscn" id="5_8k8qs"]
+[ext_resource type="Script" path="res://smoother.gd" id="4_0tb7f"]
+[ext_resource type="Texture2D" uid="uid://duq2xrkom4syo" path="res://assets/arm_chair.png" id="4_64dij"]
 [ext_resource type="Texture2D" uid="uid://7axctgewxblb" path="res://assets/old_tv.png" id="6_6ljvl"]
 [ext_resource type="Texture2D" uid="uid://bb6to4mc68fs0" path="res://assets/engine.png" id="7_qt8j5"]
 [ext_resource type="PackedScene" uid="uid://dc4dugitj8rje" path="res://environments/ship_parts/engine_glow.tscn" id="8_eohy7"]
@@ -1723,6 +1723,9 @@ physics_layer_0/collision_mask = 4
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_3ejju")
 sources/0 = SubResource("TileSetAtlasSource_6wk1s")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pney4"]
+size = Vector2(59, 66)
+
 [node name="Space" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -1767,7 +1770,7 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(65548, 720896, 10, 65549, 720896, 10, 65550, 720896, 10, 65551, 720896, 10, 65552, 720896, 10, 65553, 720896, 10, 65554, 720896, 10, 65555, 720896, 10, 65556, 720896, 10, 65557, 786432, 10, 65558, 720896, 10, 65559, 720896, 10, 65560, 720896, 10, 65561, 720896, 10, 65562, 720896, 10, 655372, 720896, 10, 655373, 720896, 10, 655374, 720896, 10, 655375, 720896, 10, 655376, 720896, 10, 655377, 720896, 10, 655378, 720896, 10, 655379, 720896, 10, 655380, 851968, 10, 655381, 720896, 10, 655382, 720896, 10, 655383, 720896, 10, 655384, 720896, 10, 655385, 720896, 10, 655386, 720896, 10, 65563, 655360, 10, 655387, 655360, 11, 655371, 589824, 11, 65547, 589824, 10, 131083, 720896, 11, 196619, 720896, 11, 262155, 786432, 11, 327691, 720896, 11, 393227, 720896, 11, 458763, 786432, 11, 524299, 720896, 11, 589835, 720896, 11, 131099, 720896, 11, 196635, 786432, 11, 589851, 720896, 11, 524315, 786432, 11, 262171, 655360, 11, 458779, 917504, 11, 524316, 720896, 10, 524317, 720896, 10, 524318, 720896, 10, 524319, 720896, 10, 524320, 720896, 10, 524321, 720896, 10, 196636, 720896, 10, 196637, 720896, 10, 196638, 720896, 10, 196639, 720896, 10, 196640, 720896, 10, 196641, 720896, 10, 262178, 720896, 11, 327714, 720896, 11, 393250, 720896, 11, 458786, 720896, 11, 196642, 655360, 10, 524322, 655360, 11, 131093, 720896, 11, 196629, 720896, 11, 262165, 851968, 10, 262166, 720896, 10, 262167, 917504, 10, 262170, 983040, 11, 262164, 720896, 10, 262163, 720896, 10, 262162, 720896, 10, 262161, 720896, 10, 262160, 983040, 11, 262157, 917504, 10, 262156, 720896, 10, 458764, 720896, 10, 458765, 720896, 10, 458767, 720896, 10, 458766, 720896, 10, 458768, 917504, 10, 458771, 983040, 11, 458772, 655360, 10, 524308, 720896, 11, 589844, 720896, 11, 15, 0, 18, 720911, 0, 16, 16, 0, 16, 17, 0, 16, 18, 0, 16, 720914, 0, 16, 720913, 0, 16, 720912, 0, 16)
 
 [node name="Smoother" type="Node" parent="Ship/ShipFloor/Tilemap"]
-script = ExtResource("4_ystgi")
+script = ExtResource("4_0tb7f")
 
 [node name="ShipFloorCollision" type="CollisionPolygon2D" parent="Ship/ShipFloor"]
 visible = false
@@ -1785,8 +1788,22 @@ enabled = false
 zoom = Vector2(0.6, 0.6)
 process_callback = 0
 
-[node name="Helm" parent="Ship" instance=ExtResource("5_8k8qs")]
-position = Vector2(678, 2)
+[node name="Helm" type="Area2D" parent="Ship"]
+process_mode = 3
+z_index = 1
+position = Vector2(681, 2.00001)
+collision_layer = 0
+collision_mask = 4
+
+[node name="HelmArea" type="CollisionShape2D" parent="Ship/Helm"]
+position = Vector2(0.900024, -0.500031)
+shape = SubResource("RectangleShape2D_pney4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ship/Helm"]
+position = Vector2(-1.60004, -0.600342)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_64dij")
 
 [node name="Player" parent="Ship" instance=ExtResource("3_2cf00")]
 position = Vector2(511, -2.99999)

@@ -12,3 +12,5 @@ func move(input_direction_rotated : Vector2):
 	if persistent_state.velocity == Vector2.ZERO:
 		persistent_state.change_state("idle")
 
+#func interact(interactable : Node2D):
+#	pass
